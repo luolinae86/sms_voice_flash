@@ -29,7 +29,10 @@ Or install it yourself as:
 - content 发送内容
 
 ```ruby
+#初始化服务
 SmsVoiceFlash.set(key,sign)
+
+#发送短信
 SmsVoiceFlash.sms(mobile,content)
 ```
 
