@@ -1,8 +1,7 @@
 # SmsVoiceFlash
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/sms_voice_flash`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+一种快速接入中国移动，中国联通，中国电信的短信、语音、闪信服务平台的服务接口
+使开发者，能够非常方便，快捷，高效地给用户发送短信、语音、闪信通知
 
 ## Installation
 
@@ -22,7 +21,14 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+其中:
+- key是服务商提供给每个用户的身份凭证
+- sign为短信尾巴的签名，最大10个字符长度，如: "中国快递",并需要向服商提前报备
+- mobile 用户手机号
+- content 发送内容
+
+SmsVoiceFlash.set(key,sign)
+SmsVoiceFlash.sms(mobile,content)
 
 ## Development
 
