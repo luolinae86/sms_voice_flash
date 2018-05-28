@@ -28,8 +28,10 @@ Or install it yourself as:
 - mobile 用户手机号
 - content 发送内容
 
+```ruby
 SmsVoiceFlash.set(key,sign)
 SmsVoiceFlash.sms(mobile,content)
+```
 
 ## Development
 
