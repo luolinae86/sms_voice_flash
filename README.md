@@ -4,37 +4,76 @@
 
 使开发者，能够非常方便，快捷，高效地给用户发送短信、语音、闪信通知
 
-## Installation
+## 安装步骤
 
-Add this line to your application's Gemfile:
+在Gemfile文件中，添加下面这一行
 
 ```ruby
 gem 'sms_voice_flash'
 ```
 
-And then execute:
+然后执行
 
     $ bundle
 
-Or install it yourself as:
+或者手动安装
 
     $ gem install sms_voice_flash
 
-## Usage
+## 参数及使用说明
 
-其中:
-- key是服务商提供给每个用户的身份凭证
+### 参数介绍
+传入参数:
+- key是服务商提供给的一串字符，为不同客户的身份凭证
 - sign为短信尾巴的签名，最大10个字符长度，如: "中国快递",并需要向服商提前报备
-- mobile 用户手机号
+- mobile 用户手机号，支持单条发送，也支持以数组的形式发送（为了效率，每次最多支持100个号码)
 - content 发送内容
 
+### 发送短信 
 ```ruby
 #初始化服务
+#假定 key = "LKiw2STo1NvouhQ4OKOw6hrdp" sign = "中国快递"
+
 SmsVoiceFlash.set(key,sign)
 
-#发送短信
+#单条发送短信
+#假定mobile = "13512345678" content = "我爱Ruby"
+
 SmsVoiceFlash.sms(mobile,content)
+
+#多条发送
+#假定 mobile = ["13512345678","13612345678","18612345678"],content="我爱ruby"
+
+SmsVoiceFlash.sms(mobile,content)
+
 ```
+### 返回值说明
+返回值为json格式
+- code    返回码
+- message 信息描述
+- uid     本条消息唯一识别码，请保留用来跟跟消息的后续状态。
+
+返回值 
+- 正常返回 {"code":0,"message":"正在发送","uid":"iSrXps3QHYCt9CeoEySPrvUo6Lhr1MIg"}
+- 异常返回
+ - {"message": "Your authentication credentials are invalid"}
+ - {"message":"API rate limit exceeded"} 默认发送速率为，5条每秒，如果超过上限会提示这个错误
+ - {"code":2,"message":"手机号码不正确","uid":""}
+ - {"code":3,"message":"ts参数错误,注意是秒单位，误差不能超过5分钟","uid":""}
+ - {"code":4,"message":"发送内容不正确","uid":""}
+ - {"code":5,"message":"签名信息不正确","uid":""}
+
+### 获取返回值
+
+```ruby
+result = SmsVoiceFlash.sms(mobile,content)
+
+code    = result.code
+message = result.code
+uid     = result.code
+
+```
+
 
 ## Development
 
