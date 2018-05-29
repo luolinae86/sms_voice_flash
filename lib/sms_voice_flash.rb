@@ -15,7 +15,7 @@ module SmsVoiceFlash
 
   def sms(mobile,content)
     url = URI.encode("#{SmsUrl}?apikey=#{@key}&mobile=#{mobile}&content=#{content}&ts=#{Time.now.to_i}&sign=#{@sign}")
-    result = JSON.parse(RestClient.get(url).body,symbolize_names: true)
+    result = JSON.parse(RestClient.get(url).body,object_class: OpenStruct)
   end
 
 end
