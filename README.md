@@ -26,7 +26,7 @@ gem 'sms_voice_flash'
 传入参数:
 - key是服务商提供给的一串字符，为不同客户的身份凭证
 - sign为短信尾巴的签名，最大10个字符长度，如: "中国快递",并需要向服商提前报备
-- mobile 用户手机号，支持单条发送，也支持以数组的形式发送（为了效率，每次最多支持100个号码)
+- mobile 用户手机号，支持单条发送，也支持以数组的形式发送
 - content 发送内容
 
 ### 发送短信 
@@ -83,8 +83,11 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/sms_voice_flash. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
-
+```ruby
+git clone git@github.com:luolinae86/sms_voice_flash.git
+cd sms_voice_flash
+bundle console # 请不要使用 irb，可能会有依赖问题
+```
 
 ## License
 
