@@ -29,7 +29,7 @@ gem 'sms_voice_flash'
 - mobile 用户手机号，支持单条发送，也支持以数组的形式发送
 - content 发送内容
 
-### 发送短信 
+## 发送短信 
 ```ruby
 #初始化服务
 #假定 key = "LKiw2STo1NvouhQ4OKOw6hrdp" sign = "中国快递"
@@ -51,7 +51,7 @@ SmsVoiceFlash.sms(mobile,content)
 返回值为json格式
 - code    返回码
 - message 信息描述
-- uid     本条消息唯一识别码，请保留用来跟跟消息的后续状态。
+- uid     本条消息唯一识别码，请保留用来跟踪消息的后续状态。
 
 返回值 
 - 正常返回 {"code":0,"message":"正在发送","uid":"iSrXps3QHYCt9CeoEySPrvUo6Lhr1MIg"}
@@ -63,7 +63,7 @@ SmsVoiceFlash.sms(mobile,content)
  - {"code":4,"message":"发送内容不正确","uid":""}
  - {"code":5,"message":"签名信息不正确","uid":""}
 
-### 获取返回值
+### 获取发送消息返回值
 
 ```ruby
 result = SmsVoiceFlash.sms(mobile,content)
@@ -73,6 +73,24 @@ message = result.code
 uid     = result.code
 
 ```
+
+## 获取短信状态 
+```ruby
+
+SmsVoiceFlash.set(key)
+SmsVoiceFlash.report
+
+```
+### 短信状态说明
+
+- 返回 json 数组 
+ - type , string 为 report 或 mo ，  report类型为发送状态， mo为短信上行 
+ - uid  消息唯一识别码，这里的uid是之前发送接口返回的uid，拿到uid就可以更新数据库里面短信状态
+ - mobile 手机号码
+ - message  返回内容:
+  - type=report 时"SUCCESS" 代表投递成功，其他代码投递失败
+  -  type=mo 时， 该内容为上行消息内容 
+ - ts  为消息产生时的 时间戳
 
 
 ## Development
