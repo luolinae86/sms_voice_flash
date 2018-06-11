@@ -9,7 +9,7 @@ module SmsVoiceFlash
   SendUrl = "https://k.ylb.io/api/message/v0/send"
   ReportUrl = "https://k.ylb.io/api/message/v0/report"
 
-  def set(key,sign)
+  def set(key,sign="短信飞毛脚")
     @key = key
     @sign = sign
   end
@@ -24,7 +24,7 @@ module SmsVoiceFlash
   end
 
   def report
-    url = URI.encode("#{SendUrl}?apikey=#{@key}")
+    url = URI.encode("#{ReportUrl}?apikey=#{@key}")
     result = JSON.parse(RestClient.get(url).body,object_class: OpenStruct)
   end
 
