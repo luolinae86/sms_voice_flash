@@ -6,7 +6,8 @@ module SmsVoiceFlash
 
   extend self
 
-  SmsUrl = "https://k.ylb.io/api/message/v0/send"
+  SendUrl = "https://k.ylb.io/api/message/v0/send"
+  ReportUrl = "https://k.ylb.io/api/message/v0/report"
 
   def set(key,sign)
     @key = key
@@ -18,7 +19,12 @@ module SmsVoiceFlash
     if mobile.kind_of?(Array)
       mobile = mobile.map{|number| number.strip}.join(",")
     end
-    url = URI.encode("#{SmsUrl}?apikey=#{@key}&mobile=#{mobile}&content=#{content}&ts=#{Time.now.to_i}&sign=#{@sign}")
+    url = URI.encode("#{SendUrl}?apikey=#{@key}&mobile=#{mobile}&content=#{content}&ts=#{Time.now.to_i}&sign=#{@sign}")
+    result = JSON.parse(RestClient.get(url).body,object_class: OpenStruct)
+  end
+
+  def report
+    url = URI.encode("#{SendUrl}?apikey=#{@key}")
     result = JSON.parse(RestClient.get(url).body,object_class: OpenStruct)
   end
 
